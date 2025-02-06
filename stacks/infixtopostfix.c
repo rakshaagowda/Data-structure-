@@ -4,50 +4,59 @@
 #include <string.h>
 #include <math.h>
 #define MAX 30
-
+typedef struct cstack{
 char charStack[MAX];
-int charTop=-1;
+int charTop;
+}*cs;
+
+
+
+typedef struct istack{
 int intStack[MAX];
-int intTop=-1;
-void pushChar(char c){
-    if(charTop== MAX-1){
+int intTop;
+}*is;
+
+
+
+void pushChar(cs S,char c){
+    if(S->charTop== MAX-1){
         printf("Stack overflow");
         return ;
     }
-    charStack[++charTop]=c;
+    S->charStack[++(S->charTop)]=c;
     
 }
-char popChar(){
-    if(charTop== -1){
+char popChar(cs S){
+    if(S->charTop== -1){
         printf("Stack underflow");
         return '\0';
     }
-    return charStack[charTop--];
+    return S->charStack[(S->charTop)--];
     
 }
-char peekChar(){
-    if(charTop== -1){
+char peekChar(cs S){
+    if(S->charTop== -1){
         printf("Stack underflow");
         return '\0';
     }
-    return charStack[charTop];
+    return S->charStack[S->charTop];
     
 }
-void pushInt(int x){
-    if(intTop== MAX-1){
+void pushInt(is I,int x){
+    if(I->intTop== MAX-1){
         printf("Stack overflow");
         return ;
     }
-    intStack[++intTop]=x;
+    I->intStack[++(I->intTop)]=x;
     
 }
 
-int popInt(){
-    if(intTop== -1){
+int popInt(is I){
+    if(I->intTop== -1){
         printf("Stack underflow");
         return 0;
     }
-    return intStack[intTop--];
+    return I->intStack[I->intTop--];
     
 }
 
@@ -71,7 +80,7 @@ int isOperator(char c){
     return 0;
 }
 
-void infixtopostfix(char* infix,char*postfix){
+void infixtopostfix(cs S,char* infix,char*postfix){
     int i=0,j=0;
     char c;
     while((c=infix[i++])!='\0'){
@@ -79,65 +88,71 @@ void infixtopostfix(char* infix,char*postfix){
         postfix[j++]=c;
     }
     else if(c=='('){
-        pushChar(c);
+        pushChar(S,c);
     }
     else if(c==')'){
-        while(charTop!=-1 && peekChar()!= '('){
-            postfix[j++]=popChar();
+        while(S->charTop!=-1 && peekChar(S)!= '('){
+            postfix[j++]=popChar(S);
         }
-        popChar();
+        popChar(S);
     }
     else if(isOperator(c)){
-        while(charTop!=-1 && precedence(peekChar())>= precedence(c)){
-            postfix[j++]=popChar();
+        while(S->charTop!=-1 && precedence(peekChar(S))>= precedence(c)){
+            postfix[j++]=popChar(S);
         }
-        pushChar(c);
+        pushChar(S,c);
     
     }
     }
-    while(charTop!=-1){
-        postfix[j++]=popChar();
+    while(S->charTop!=-1){
+        postfix[j++]=popChar(S);
     }
     postfix[j]='\0';
 }
 
-void evaluatePostfix(char* postfix){
+void evaluatePostfix(is I,char* postfix){
+    
     int j=0,final,res;
     char c;
     while((c=postfix[j++])!='\0'){
         if(isdigit(c)){
-            pushInt(c-'0');
+            pushInt(I,c-'0');
         }else if(isOperator(c)){
-            int val2=popInt();
-            int val1=popInt();
+            int val2=popInt(I);
+            int val1=popInt(I);
             switch(c){
-                case '+': pushInt(val1+val2);break;
-                 case '-': pushInt(val1-val2);break;
-                  case '*': pushInt(val1*val2);break;
-                   case '/': pushInt(val1/val2);break;
-                    case '%': pushInt(val1%val2);break;
+                case '+': pushInt(I,val1+val2);break;
+                 case '-': pushInt(I,val1-val2);break;
+                  case '*': pushInt(I,val1*val2);break;
+                   case '/': pushInt(I,val1/val2);break;
+                    case '%': pushInt(I,val1%val2);break;
                     case '^': res=powf(val1,val2);
-                                pushInt(res);
+                                pushInt(I,res);
                                 break;
             }
         }
     }
-    final=popInt();
+    final=popInt(I);
     printf("final result: %d",final);
 }
 
 int main()
-{
-        char infix[MAX],postfix[MAX];
-        
+{   
+    char infix[MAX],postfix[MAX];  
+     cs S;
+    is I;
+    S=(cs)malloc(sizeof(struct cstack));
+    I=(is)malloc(sizeof(struct istack));
+      
         printf("Enter an infix expression: ");
     scanf("%s", infix);
-
-    infixtopostfix(infix, postfix);
+    
+    infixtopostfix(S,infix, postfix);
     printf("Postfix expression: %s\n", postfix);
 
-    evaluatePostfix(postfix);
+    evaluatePostfix(I,postfix);
     //printf("Result of evaluation: %d\n", result);
 	
 	return 0;
 }
+
