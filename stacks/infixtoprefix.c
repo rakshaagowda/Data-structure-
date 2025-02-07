@@ -17,7 +17,15 @@ int intStack[MAX];
 int intTop;
 }*is;
 
-
+void reversestr(char *str){
+    int len=strlen(str);
+    int i;
+    for(i=0;i<len/2;i++){
+        char temp=str[i];
+        str[i]=str[len-i-1];
+        str[len-i-1]=temp;
+    }
+}
 
 void pushChar(cs S,char c){
     if(S->charTop== MAX-1){
@@ -83,17 +91,18 @@ int isOperator(char c){
 }
 
 void infixtoprefix(cs S,char* infix,char*prefix){
+    reversestr(infix);
     int i=0,j=0;
     char c;
     while((c=infix[i++])!='\0'){
     if(isdigit(c)|| isalpha(c)){
         prefix[j++]=c;
     }
-    else if(c=='('){
+    else if(c==')'){
         pushChar(S,c);
     }
-    else if(c==')'){
-        while(S->charTop!=-1 && peekChar(S)!= '('){
+    else if(c=='('){
+        while(S->charTop!=-1 && peekChar(S)!= ')'){
             prefix[j++]=popChar(S);
         }
         popChar(S);
@@ -110,10 +119,11 @@ void infixtoprefix(cs S,char* infix,char*prefix){
         prefix[j++]=popChar(S);
     }
     prefix[j]='\0';
+    reversestr(prefix);
 }
 
 void evaluatePrefix(is I,char* prefix){
-    
+    reversestr(prefix);
     int j=0,final,res;
     char c;
     while((c=prefix[j++])!='\0'){
