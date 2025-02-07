@@ -130,8 +130,8 @@ void evaluatePrefix(is I,char* prefix){
         if(isdigit(c)){
             pushInt(I,c-'0');
         }else if(isOperator(c)){
-            int val2=popInt(I);
             int val1=popInt(I);
+            int val2=popInt(I);
             switch(c){
                 case '+': pushInt(I,val1+val2);break;
                  case '-': pushInt(I,val1-val2);break;
