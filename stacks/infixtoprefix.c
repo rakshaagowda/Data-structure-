@@ -1,71 +1,64 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <math.h>
 #define MAX 30
-
+typedef struct cstack{
 char charStack[MAX];
-int charTop=-1;
+int charTop;
+}*cs;
+
+
+
+typedef struct istack{
 int intStack[MAX];
-int intTop=-1;
+int intTop;
+}*is;
 
-void reverseString(char str[]) {
-    int length = strlen(str); // Get the length of the string
-    int start = 0;            // Start index
-    int end = length - 1;     // End index
-    char temp;                // Temporary variable for swapping
 
-    while (start < end) {
-        // Swap characters at start and end
-        temp = str[start];
-        str[start] = str[end];
-        str[end] = temp;
 
-        // Move start forward and end backward
-        start++;
-        end--;
-    }
-}
-void pushChar(char c){
-    if(charTop== MAX-1){
+void pushChar(cs S,char c){
+    if(S->charTop== MAX-1){
         printf("Stack overflow");
         return ;
     }
-    charStack[++charTop]=c;
-    
-}
-char popChar(){
-    if(charTop== -1){
-        printf("Stack underflow");
-        return '\0';
-    }
-    return charStack[charTop--];
-    
-}
-char peekChar(){
-    if(charTop== -1){
-        printf("Stack underflow");
-        return '\0';
-    }
-    return charStack[charTop];
-    
-}
-void pushInt(int x){
-    if(intTop== MAX-1){
-        printf("Stack overflow");
-        return ;
-    }
-    intStack[++intTop]=x;
+    S->charStack[++(S->charTop)]=c;
     
 }
 
-int popInt(){
-    if(intTop== -1){
+char popChar(cs S){
+    if(S->charTop== -1){
+        printf("Stack underflow");
+        return '\0';
+    }
+    return S->charStack[(S->charTop)--];
+    
+}
+char peekChar(cs S){
+    if(S->charTop== -1){
+        printf("Stack underflow");
+        return '\0';
+    }
+    return S->charStack[S->charTop];
+    
+}
+void pushInt(is I,int x){
+    if(I->intTop== MAX-1){
+        printf("Stack overflow");
+        return ;
+    }
+    I->intStack[++(I->intTop)]=x;
+    
+}
+
+int popInt(is I){
+    if(I->intTop== -1){
         printf("Stack underflow");
         return 0;
     }
-    return intStack[intTop--];
+    return I->intStack[I->intTop--];
     
 }
 
@@ -89,84 +82,79 @@ int isOperator(char c){
     return 0;
 }
 
-void infixtoprefix(char* infix,char*prefix){
+void infixtoprefix(cs S,char* infix,char*prefix){
     int i=0,j=0;
     char c;
-    reverseString(infix);
-    for (int k = 0; infix[k] != '\0'; k++) {
-        if (infix[k] == '(')
-            infix[k] = ')';
-        else if (infix[k] == ')')
-            infix[k] = '(';
-    }
-    
-    
     while((c=infix[i++])!='\0'){
     if(isdigit(c)|| isalpha(c)){
         prefix[j++]=c;
     }
     else if(c=='('){
-        pushChar(c);
+        pushChar(S,c);
     }
     else if(c==')'){
-        while(charTop!=-1 && peekChar()!= '('){
-            prefix[j++]=popChar();
+        while(S->charTop!=-1 && peekChar(S)!= '('){
+            prefix[j++]=popChar(S);
         }
-        popChar();
+        popChar(S);
     }
     else if(isOperator(c)){
-        while(charTop!=-1 && precedence(peekChar())>= precedence(c)){
-            prefix[j++]=popChar();
+        while(S->charTop!=-1 && precedence(peekChar(S))>= precedence(c)){
+            prefix[j++]=popChar(S);
         }
-        pushChar(c);
+        pushChar(S,c);
     
     }
     }
-    while(charTop!=-1){
-        prefix[j++]=popChar();
+    while(S->charTop!=-1){
+        prefix[j++]=popChar(S);
     }
     prefix[j]='\0';
-    reverseString(prefix);
 }
 
-void evaluatePrefix(char* prefix){
+void evaluatePrefix(is I,char* prefix){
+    
     int j=0,final,res;
     char c;
-     reverseString(prefix);
     while((c=prefix[j++])!='\0'){
         if(isdigit(c)){
-            pushInt(c-'0');
+            pushInt(I,c-'0');
         }else if(isOperator(c)){
-            int val1=popInt();
-            int val2=popInt();
+            int val2=popInt(I);
+            int val1=popInt(I);
             switch(c){
-                case '+': pushInt(val1+val2);break;
-                 case '-': pushInt(val1-val2);break;
-                  case '*': pushInt(val1*val2);break;
-                   case '/': pushInt(val1/val2);break;
-                    case '%': pushInt(val1%val2);break;
+                case '+': pushInt(I,val1+val2);break;
+                 case '-': pushInt(I,val1-val2);break;
+                  case '*': pushInt(I,val1*val2);break;
+                   case '/': pushInt(I,val1/val2);break;
+                    case '%': pushInt(I,val1%val2);break;
                     case '^': res=powf(val1,val2);
-                                pushInt(res);
+                                pushInt(I,res);
                                 break;
             }
         }
     }
-    final=popInt();
+    final=popInt(I);
     printf("final result: %d",final);
 }
 
 int main()
-{
-        char infix[MAX],prefix[MAX];
-        
+{   
+    char infix[MAX],prefix[MAX];  
+     cs S;
+    is I;
+    S=(cs)malloc(sizeof(struct cstack));
+    I=(is)malloc(sizeof(struct istack));
+      
         printf("Enter an infix expression: ");
     scanf("%s", infix);
-
-    infixtoprefix(infix, prefix);
+    
+    infixtoprefix(S,infix, prefix);
     printf("Postfix expression: %s\n", prefix);
 
-    evaluatePrefix(prefix);
-    
+    evaluatePrefix(I,prefix);
+    //printf("Result of evaluation: %d\n", result);
 	
 	return 0;
 }
+
