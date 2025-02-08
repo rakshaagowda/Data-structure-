@@ -22,6 +22,18 @@ void read(s std){
             
     }
 }
+void sort(s std){
+    for(int i=0;i<n-1;i++){
+        for(int j=0;j<n-i-1;j++){
+            if((std+j)->regn>(std+(j+1))->regn){
+                int k=j+1;
+                struct student temp=*(std+j);
+                *(std+j)=*(std+k);
+                *(std+k)=temp;
+            }
+        }
+    }
+}
 
 void display(s std){
     for(int i=0;i<n;i++){
