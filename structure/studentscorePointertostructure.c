@@ -36,6 +36,7 @@ void sort(s std){
 }
 
 void display(s std){
+    sort(std);
     for(int i=0;i<n;i++){
          printf("\nenter student  %d name: ",(i+1));
         printf("%s",(std+i)->name);
