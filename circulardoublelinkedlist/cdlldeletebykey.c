@@ -46,3 +46,11 @@ void deletebykey(Node Header,int key){
         Header->data=count;
     }
 }
+int main(){
+    int choice,data;
+
+
+
+
+    return 0;
+}
