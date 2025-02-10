@@ -48,7 +48,7 @@ void insertbykey(Node Header,int key){
 int main(){
     int choice,data;
     Node Header=createnode(0);  
-
+    printf("\nMenu\n1. Insert\n0. Exit\n");
     for(;;){
         printf("Enter ur choice: ");
         switch(choice){
