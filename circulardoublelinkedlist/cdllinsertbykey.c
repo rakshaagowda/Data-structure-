@@ -45,3 +45,23 @@ void insertbykey(Node Header,int key){
     temp->prev->next=nn;
     temp->prev=nn;
 }
+int main(){
+    int choice,data;
+    Node Header=createnode(0);  
+
+    for(;;){
+        printf("Enter ur choice: ");
+        switch(choice){
+            case 1:
+                printf("Enter data: ");
+                scanf("%d",&data);
+                insertbykey(Header,data);
+                break;
+            case 0: exit(0);
+            default:printf("invalid choice");
+        }
+    }
+
+
+    return 0;
+}
