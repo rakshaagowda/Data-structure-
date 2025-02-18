@@ -1,3 +1,4 @@
+//print n number from n-1 using recursion
 #include <stdio.h>
 
 
