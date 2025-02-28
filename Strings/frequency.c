@@ -3,12 +3,16 @@
 void frequency(char str[],char ch){
  int  count=0;
   for(int i=0;i<strlen(str);i++){
+    if(str[i]==' '){
+      continue;
+    }
     if(str[i]==ch){
       count++;
   }
   
   }
   printf("%c-%d",ch,count);
+  printf("\n");
 
 }
 int main(){
