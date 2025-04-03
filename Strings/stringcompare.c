@@ -26,6 +26,9 @@ int main()
   if(flag==0){
     printf("strings are ==");
   }
+  else{
+    printf("strings are !=");
+  }
   }
   return 0;
 }
