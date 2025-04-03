@@ -15,10 +15,13 @@ int main()
   }
   
   else{
-    int i=0;
-  while((a[i]!='\0'))
+    int i=0,flag=0;
+  while((a[i]!='\0')){
   if(a[i]!=b[i]){
-    
+    flag=1;
+    break;
+  }
+  i++;
   }
   }
   return 0;
