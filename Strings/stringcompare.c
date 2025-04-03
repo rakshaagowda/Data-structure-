@@ -13,5 +13,13 @@ int main()
   if(l1!=l2){
     printf("strings are not equal");
   }
+  
+  else{
+    int i=0;
+  while((a[i]!='\0'))
+  if(a[i]!=b[i]){
+    
+  }
+  }
   return 0;
 }
