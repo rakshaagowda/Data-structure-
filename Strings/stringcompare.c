@@ -23,6 +23,9 @@ int main()
   }
   i++;
   }
+  if(flag==0){
+    printf("strings are ==");
+  }
   }
   return 0;
 }
