@@ -27,3 +27,6 @@ void deletefront(Node Header){
     Header->next->prev=Header;
     n--;
   }
+  int main(){
+      Node Header=createnode(0);
+  }
