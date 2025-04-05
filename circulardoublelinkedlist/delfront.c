@@ -37,4 +37,6 @@ void deletefront(Node Header){
           scanf("%d",&data);
           insertRear(Header,data);  
       }
+      deletefront(Header);
+      return 0;
   }
