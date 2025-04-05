@@ -19,3 +19,11 @@ Node createnode(int data){
     
     return nn;
 }
+void deletefront(Node Header){
+  if(Header->next==Header){
+      return;
+  }
+  Header->next=Header->next->next;
+  Header->next->prev=Header;
+  n--;
+}
