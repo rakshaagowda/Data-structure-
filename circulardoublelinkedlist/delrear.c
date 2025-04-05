@@ -27,3 +27,14 @@ void deleterear(Node Header){
   Header->prev->next= Header;
   n--;
 }
+int main(){
+  Node Header=createnode(0);
+  Header->next=Header->prev=Header;
+  int data,n;
+  printf("Enter the number of elements\n");
+  scanf("%d",&n);  
+  for(int i=0;i<n;i++){
+      scanf("%d",&data);
+      insertRear(Header,data);  
+  }
+}
