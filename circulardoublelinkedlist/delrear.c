@@ -37,4 +37,6 @@ int main(){
       scanf("%d",&data);
       insertRear(Header,data);  
   }
+  deleterear(Header);
+  return 0;
 }
