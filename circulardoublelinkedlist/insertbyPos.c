@@ -37,3 +37,19 @@ void insertbypos(Node Header,int data,int pos){
     temp->next=nn;
     count++;  
 }
+int main(){
+    Node Header=createnode(0);
+    Header->next=Header;
+    Header->prev=Header;
+    n=0;
+    count=0;
+    insertbypos(Header,10,1);
+    insertbypos(Header,20,2);
+    insertbypos(Header,30,3);
+    insertbypos(Header,40,4);
+    insertbypos(Header,50,5);
+    insertbypos(Header,60,6);
+    insertbypos(Header,70,7);
+
+    return 0;
+}
