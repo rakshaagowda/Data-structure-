@@ -23,3 +23,8 @@ void insertbykey(Node Header,int data){
   Node nn=createnode(data);
 
 }
+int main(){
+
+
+  return 0;
+}
