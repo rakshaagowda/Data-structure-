@@ -19,3 +19,7 @@ Node createnode(int data){
   
   return nn;
 }
+void insertbykey(Node Header,int data){
+  Node nn=createnode(data);
+
+}
