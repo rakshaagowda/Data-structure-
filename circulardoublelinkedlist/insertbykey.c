@@ -21,6 +21,15 @@ Node createnode(int data){
 }
 void insertbykey(Node Header,int data){
   Node nn=createnode(data);
+  Node temp=Header->next;
+  while(temp->next->data<data){
+    temp=temp->next;
+  }
+  nn->prev=temp;
+  nn->next=temp->next;
+  temp->next->prev=nn;
+  temp->next=nn;
+  
 
 }
 int main(){
