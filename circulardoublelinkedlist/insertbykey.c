@@ -33,7 +33,18 @@ void insertbykey(Node Header,int data){
 
 }
 int main(){
-
+  Node Header=createnode(0);
+    Header->next=Header;
+    Header->prev=Header;
+    n=0;
+    count=0;
+    insertbykey(Header,10);
+    insertbykey(Header,20);
+    insertbykey(Header,30);
+    insertbykey(Header,40);
+    insertbykey(Header,50);
+    insertbykey(Header,60);
+    insertbykey(Header,70);
 
   return 0;
 }
