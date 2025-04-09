@@ -7,3 +7,10 @@ void read(int* ptr){
         
         }
     }
+
+    
+void display(int* ptr){
+  for(int i=0;i<n;i++){
+      printf("%d\t",*(ptr+i));
+  }
+}
