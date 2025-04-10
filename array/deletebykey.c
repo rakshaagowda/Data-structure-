@@ -26,7 +26,7 @@ void deletebykey(int* ptr,int key){
       }
       
       if(flag == 0){
-          printf("\nkey not found");
+          printf("\nKey not found");
           return ;
           }
       else{
