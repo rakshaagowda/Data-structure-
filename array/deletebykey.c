@@ -42,7 +42,7 @@ void deletebykey(int* ptr,int key){
 
     int *ptr;
     int i;
-    printf("\nenter the number of elements: ");
+    printf("\nEnter the initial number of elements: ");
     scanf("%d",&n);
     ptr=(int*)malloc(n*sizeof(int));
     read(ptr);
