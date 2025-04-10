@@ -47,7 +47,7 @@ void deletebykey(int* ptr,int key){
     ptr=(int*)malloc(n*sizeof(int));
     read(ptr);
     display(ptr);
-    printf("\nenter the key to be deleted: ");
+    printf("\nplease enter the key to be deleted: ");
     scanf("%d",&key);
     deletebykey(ptr,key);
     display(ptr);
