@@ -12,3 +12,10 @@ void read(int* ptr){
         printf("%d\t",*(ptr+i));
     }
   }
+  void deletebypos(int* ptr,int pos){
+    printf("deleted key is %d",*(ptr+(pos-1)));
+    for(int i=pos-1;i<n-1;i++){
+        *(ptr+i)=*(ptr+(i+1));
+    }
+    n--;
+  }
