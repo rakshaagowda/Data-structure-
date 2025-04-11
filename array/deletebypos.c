@@ -19,3 +19,21 @@ void read(int* ptr){
     }
     n--;
   }
+  int main(){
+
+    int *ptr;
+    int i;
+    printf("\nEnter the initial number of elements: ");
+    scanf("%d",&n);
+    ptr=(int*)malloc(n*sizeof(int));
+    read(ptr);
+    display(ptr);
+
+
+    printf("\nEnter the position to be deleted: ");
+    scanf("%d",&pos);
+    deletebypos(ptr,pos);
+    display(ptr); 
+
+  return 0;  
+  }
