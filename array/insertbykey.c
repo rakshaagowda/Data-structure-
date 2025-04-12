@@ -22,4 +22,16 @@ void insertbykey(int* ptr,int key,int pos){
   for(int i=n;i>pos;i--){
       *(ptr+i)=*(ptr+(i-1));
   }       
-  }
+  
+  *(ptr+(pos-1))=key;
+  n++;
+} 
+int main(){
+
+  int *ptr;
+  int i;
+  printf("\nEnter the initial number of elements: "); 
+  scanf("%d",&n);
+  ptr=(int*)malloc(n*sizeof(int));  
+  
+}  
