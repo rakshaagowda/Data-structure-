@@ -41,5 +41,5 @@ int main(){
   scanf("%d",&pos);
   insertbykey(ptr,key,pos);
   display(ptr);
-  
+  return 0;
 }  
