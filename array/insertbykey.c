@@ -29,7 +29,7 @@ void insertbykey(int* ptr,int key,int pos){
 int main(){
 
   int *ptr;
-  int i;
+  int i,pos,key;
   printf("\nEnter the initial number of elements: "); 
   scanf("%d",&n);
   ptr=(int*)malloc(n*sizeof(int));  
