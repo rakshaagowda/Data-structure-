@@ -17,4 +17,14 @@ int main(){
   printf("Enter the elements: ");
   for(int i=0; i<n; i++){
     scanf("%d", &arr[i]);
-}}
+
+}
+reverse_elements(arr, n);
+printf("Reversed array: "); 
+for(int i=0; i<n; i++){
+  printf("%d ", arr[i]);
+}
+printf("\n");
+return 0;
+}
+
