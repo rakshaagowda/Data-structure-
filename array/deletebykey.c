@@ -1,3 +1,4 @@
+//delete an element by key
 #include<stdio.h>
 int n,pos,key;
 void read(int* ptr){
