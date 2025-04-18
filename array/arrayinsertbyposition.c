@@ -1,3 +1,4 @@
+//insert an element by position in the sorted array
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 5
