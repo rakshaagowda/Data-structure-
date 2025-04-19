@@ -1,3 +1,4 @@
+//delete an element by position
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 5
