@@ -1,4 +1,4 @@
-//delete an element by position
+//delete an element by position in an array
 #include<stdio.h>
 int n,pos,key;
 void read(int* ptr){
