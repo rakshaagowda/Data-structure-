@@ -1,4 +1,4 @@
-
+//search an element and insert
 #include<stdio.h>
 #include<stdlib.h>
 int size;
