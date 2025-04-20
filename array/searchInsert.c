@@ -3,6 +3,7 @@
 #include<stdlib.h>
 int size;
 int n,pos,key;
+//i don wanna lose you
 
 void read(int* ptr){
     printf("enter %d elements:",n);
